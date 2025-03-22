@@ -1,11 +1,16 @@
 <script setup>
 import {ref} from 'vue'
+import {useRouter} from 'vue-router'
 
 const username = ref('')
 const password = ref('')
 
+const router = useRouter()
+
 const handleLogin = () => {
-    console.log("login attempted");
+    console.log("login attempted")
+    router.push({name: 'Indexes'})
+    console.log("routed")
 }
 </script>
 
