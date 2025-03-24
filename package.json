@@ -4,6 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "check:types": "vue-tsc --noEmit",
+    "lint": "eslint \"src/**/*.{ts,vue}\"",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -13,7 +15,13 @@
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.28.0",
+    "@typescript-eslint/parser": "^8.28.0",
     "@vitejs/plugin-vue": "^5.2.1",
-    "vite": "^6.2.0"
+    "eslint-define-config": "^2.1.0",
+    "eslint-plugin-vue": "^10.0.0",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.0",
+    "vue-tsc": "^2.2.8"
   }
 }

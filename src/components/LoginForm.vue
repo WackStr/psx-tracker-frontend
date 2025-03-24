@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import {ref} from 'vue'
 import {useRouter} from 'vue-router'
 
@@ -19,12 +19,12 @@ const handleLogin = () => {
             <h2>Login</h2>
         <label>
             Username:
-            <input type="text" v-model="username" />
+            <input v-model="username"  type="text"/>
         </label>
         <br />
         <label>
             Password:
-            <input type="password" v-model="password" />
+            <input v-model="password" type="password" />
         </label>
         <br />
         <button @click="handleLogin">Login</button>

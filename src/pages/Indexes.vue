@@ -1,29 +1,52 @@
-<script setup>
-import {ref} from 'vue'
+<script setup lang="ts">
+import {ref, onMounted} from 'vue'
+import { fetchIndexData, IndexData} from '@/services/indexService'
 
-const Indexes = ref(
-    [{name: 'KSE-100', description: 'The KSE-100 index', stocks: 100, marketCap: 100_000_00}]
-)
+const Indexes = ref<IndexData[]>([])
+const isLoading = ref(true)
+const error = ref<string | null>(null)
+
+
+const fetchData = async () => {
+    try{
+        const data = await fetchIndexData()
+        Indexes.value = data
+    }catch (err: unknown) {
+        if(err instanceof Error){
+            error.value = err.message
+        }else{
+            error.value = String(err)
+        }
+    } finally {
+        isLoading.value = false;
+    }
+}
+
+onMounted(() => {
+    fetchData()
+})
 </script>
 
 <template>
     <div class="table-page">
         <h1>Indexes</h1>
-        <table>
+
+        <div v-if="isLoading">Loading data...</div>
+        <div v-else-if="error" class="error">Error fetching data</div>
+    
+        <table v-else>
             <thead>
                 <tr>
-                    <th>Index Name</th>
-                    <th>Description</th>
-                    <th>stocks</th>
-                    <th>Market Cap</th>
+                    <th>Company Script</th>
+                    <th>Measured on</th>
+                    <th>Price</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="(Index, index) in Indexes" :key="index">
-                    <td>{{  Index.name  }}</td>
-                    <td>{{  Index.description }}</td>
-                    <td>{{  Index.stocks }}</td>
-                    <td>{{  Index.marketCap }}</td>
+                    <td>{{  Index.company_script  }}</td>
+                    <td>{{  Index.measured_on }}</td>
+                    <td>{{  Index.price }}</td>
                 </tr>
             </tbody>
         </table>

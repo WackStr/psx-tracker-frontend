@@ -1,6 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import Indexes from   '../pages/Indexes.vue'
-import HomePage from '../pages/HomePage.vue'
+import Indexes from   '@/pages/Indexes.vue'
+import HomePage from '@/pages/HomePage.vue'
 
 const routes = [
     {
