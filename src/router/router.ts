@@ -1,20 +1,13 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Indexes from   '@/pages/Indexes.vue'
 import HomePage from '@/pages/HomePage.vue'
+import SignUpPage from '@/pages/SignUpPage.vue'
 import { verifyToken } from '@/services/authService'
 
 const routes = [
-    {
-        path: '/',
-        name: 'Home',
-        component: HomePage
-    },
-    {
-        path: '/indexes',
-        name: 'Indexes',
-        component: Indexes,
-        meta: { requiresAuth: true }
-    }
+    { path: '/', name: 'Home', component: HomePage },
+    { path: '/indexes', name: 'Indexes', component: Indexes, meta: { requiresAuth: true } },
+    { path: '/signup',  name: 'SignUp',  component: SignUpPage }
 ]
 
 const router = createRouter({

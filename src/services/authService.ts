@@ -2,7 +2,19 @@ export interface AuthResponse {
     token: string
 }
 
+export interface SignUpRequest {
+    firstName: string,
+    lastName: string,
+    email: string,
+    password: string
+}
+
 const baseUrl = import.meta.env.VITE_API_BASE_URL
+
+export async function signUp(req: SignUpRequest): Promise<string> {
+    console.log(`signing up ${req.email}...`)
+    return Promise.resolve('')
+}
 
 export async function login(username: string, password: string): Promise<AuthResponse> {
     const res = await fetch(`${baseUrl}/auth/login`, {

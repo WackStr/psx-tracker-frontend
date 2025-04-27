@@ -14,6 +14,7 @@ import LoginForm from '@/components/LoginForm.vue'
   </div>
   <HelloWorld msg="PSX Tracker" />
   <LoginForm/>
+  <router-link to="/signup" class="signup-link">Sign Up</router-link>
 </template>
 
 <style scoped>
@@ -28,5 +29,12 @@ import LoginForm from '@/components/LoginForm.vue'
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+}
+.signup-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #42b983;
+  text-decoration: underline;
+  cursor: pointer;
 }
 </style>
