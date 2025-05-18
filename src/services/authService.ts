@@ -1,19 +1,48 @@
 export interface AuthResponse {
-    token: string
+    access_token: string,
+    refresh_token: string,
+    token_type: string
+}
+
+export interface SignUpResponse {
+    email: string,
+    first_name: string,
+    last_name: string,
+    id: number,
+    created_on: string
 }
 
 export interface SignUpRequest {
-    firstName: string,
-    lastName: string,
+    first_name: string,
+    last_name: string,
     email: string,
     password: string
 }
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL
 
-export async function signUp(req: SignUpRequest): Promise<string> {
-    console.log(`signing up ${req.email}...`)
-    return Promise.resolve('')
+export async function signUp(req: SignUpRequest): Promise<SignUpResponse> {
+
+    const res = await fetch(`${baseUrl}/users/create`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(req)
+    })
+
+    const data = await res.json()
+    
+    if (!res.ok) {
+        console.error('SignUp Error:', {
+            status: res.status,
+            statusText: res.statusText,
+            response: data
+        })
+        throw new Error(data.message || 'Failed to sign up')
+    }
+    
+    return data as SignUpResponse
 }
 
 export async function login(username: string, password: string): Promise<AuthResponse> {
@@ -22,20 +51,21 @@ export async function login(username: string, password: string): Promise<AuthRes
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({username, password})
+        body: JSON.stringify({email: username, password: password})
     })
 
-    if (!res.ok) {
-        const err = await res.json().catch(() => ({}))
-        throw new Error(err.message || `Login failed with status ${res.status}`)
-    }
+    const data = await res.json()
 
-    return (await res.json()) as AuthResponse
+    if (!res.ok) {
+        throw new Error(data.message || `Login failed with status ${res.status}`)
+    }
+    return data as AuthResponse;
 }
 
 export async function verifyToken(): Promise<void> {
-    const token = localStorage.getItem('auth_token')
-    const res = await fetch(`${baseUrl}/auth/me`, {
+    const token = localStorage.getItem('access_token')
+    const res = await fetch(`${baseUrl}/auth/verify`, {
+        method: 'POST',
         headers: { Authorization: `Bearer ${token}` }
     })
     if (!res.ok) throw new Error('Token invalid')

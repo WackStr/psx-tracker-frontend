@@ -15,11 +15,12 @@ const handleLogin = async () => {
     error.value = null
 
     try {
-        const { token } = await login(username.value, password.value)
+        const { access_token, refresh_token } = await login(username.value, password.value)
         // store token somewher secure (e.g. localStorage)
-        localStorage.setItem('auth_token', token)
+        localStorage.setItem('access_token', access_token)
+        localStorage.setItem('refresh_token', refresh_token)
         // Redirect to your protected page
-        router.push({ name: 'TablePage'})
+        router.push({ name: 'Indexes'})
     } catch (e: unknown) {
         error.value = e instanceof Error ? e.message : String(e)
     } finally {

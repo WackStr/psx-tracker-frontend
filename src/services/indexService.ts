@@ -7,9 +7,13 @@ export interface IndexData{
 const baseUrl = import.meta.env.VITE_API_BASE_URL
 
 export async function fetchIndexData(): Promise<IndexData[]> {
-    const url = `${baseUrl}/share-price/abc`
+    const url = `${baseUrl}/share/share-price/abc`
 
-    const response = await fetch(url)
+    const response = await fetch(url, {
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+        }
+    })
 
     if(!response.ok){
         throw new Error(`Failed to fectch Data...`)

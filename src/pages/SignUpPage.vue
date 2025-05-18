@@ -16,8 +16,8 @@
         error.value = null
         try{
             await signUp({
-                firstName: firstName.value,
-                lastName: lastName.value,
+                first_name: firstName.value,
+                last_name: lastName.value,
                 email: email.value,
                 password: password.value
             })
