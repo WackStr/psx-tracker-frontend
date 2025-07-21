@@ -32,20 +32,21 @@ const handleLogin = async () => {
 <template>
         <div class="login-container">
             <h2>Login</h2>
-        <label>
-            Username:
-            <input v-model="username"  type="text"/>
-        </label>
-        <br />
-        <label>
-            Password:
-            <input v-model="password" type="password" />
-        </label>
-        <br />
-        <button :disabled="loading" @click="handleLogin">
-            {{ loading ? 'Logging in...' : 'Login' }}
-        </button>
-
+        <form @submit.prevent="handleLogin">
+            <label>
+                Username:
+                <input v-model="username"  type="text"/>
+            </label>
+            <br />
+            <label>
+                Password:
+                <input v-model="password" type="password" />
+            </label>
+            <br />
+            <button :disabled="loading" type="submit">
+                {{ loading ? 'Logging in...' : 'Login' }}
+            </button>
+        </form>
         <p v-if="error" class="error">{{  error }}</p>
     </div>
 </template>
