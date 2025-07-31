@@ -19,8 +19,8 @@ const handleLogin = async () => {
         // store token somewher secure (e.g. localStorage)
         localStorage.setItem('access_token', access_token)
         localStorage.setItem('refresh_token', refresh_token)
-        // Redirect to your protected page
-        router.push({ name: 'Indexes'})
+        // Redirect to dashboard
+        router.push({ name: 'Dashboard'})
     } catch (e: unknown) {
         error.value = e instanceof Error ? e.message : String(e)
     } finally {
