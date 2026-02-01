@@ -4,20 +4,33 @@ import LoginForm from '@/components/LoginForm.vue'
 </script>
 
 <template>
-    <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="../../public/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="../assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+  <div class="home-container">
+    <div class="logos">
+      <a href="https://vite.dev" target="_blank">
+        <img src="../../public/vite.svg" class="logo" alt="Vite logo" />
+      </a>
+      <a href="https://vuejs.org/" target="_blank">
+        <img src="../assets/vue.svg" class="logo vue" alt="Vue logo" />
+      </a>
+    </div>
+    <HelloWorld msg="PSX Tracker" />
+    <LoginForm/>
+    <router-link to="/signup" class="signup-link">Sign Up</router-link>
   </div>
-  <HelloWorld msg="PSX Tracker" />
-  <LoginForm/>
-  <router-link to="/signup" class="signup-link">Sign Up</router-link>
 </template>
 
 <style scoped>
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .logo {
   height: 6em;
   padding: 1.5em;

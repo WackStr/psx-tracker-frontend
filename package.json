@@ -20,8 +20,14 @@
     "@vitejs/plugin-vue": "^5.2.1",
     "eslint-define-config": "^2.1.0",
     "eslint-plugin-vue": "^10.0.0",
+    "msw": "^2.12.7",
     "typescript": "^5.8.2",
     "vite": "^6.2.0",
     "vue-tsc": "^2.2.8"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
